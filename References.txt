@@ -1,0 +1,7 @@
+Data Target: JWST MIRI
+
+Access NASA instrument data through MAST
+python library for data access: astroquery
+
+https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html
+

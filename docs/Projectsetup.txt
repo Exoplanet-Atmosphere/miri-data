@@ -1,0 +1,19 @@
+Dependency management currently using venv and requirements.txt
+
+in the root of the project create a virtual enviornment in a seperate folder:
+    python3 -m venv ./venv/
+
+to enable the enviornment use:
+    source ./venv/bin/activate
+
+get all project dependencies using:
+    pip install -r requirements.txt
+
+install a new dependency:
+    python3 -m pip install (name of dependency)
+
+update dependencies list "requirements.txt" in project root using:
+    pip freeze > requirements.txt
+
+run a script using:
+    python3 (python filename)
