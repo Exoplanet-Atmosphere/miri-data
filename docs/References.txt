@@ -1,11 +1,12 @@
 Data Target: JWST - for exoplanet composition
 
-*All 4 infared ranges are relevant for the task
+*All 4 infared ranges are relevant for the task *SLIT is main focus
 MIRI
 NIRSpec
 NIRISS
 
 NIRCam
+
 
 Access NASA instrument data through MAST
 python library for data access: astroquery
