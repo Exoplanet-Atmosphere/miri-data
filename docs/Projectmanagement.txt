@@ -7,9 +7,6 @@ clone the project locally using:
 
 *note: the repo hosted on github is origin:
     https://github.com/Exoplanet-Atmosphere/miri-data
-*it became the origin with the command:
-    git remote add origin https://github.com/Exoplanet-Atmosphere/miri-data
-*do not change the remote origin after cloning!
 
 stage any changes to the project at project root using:
     git add ./
