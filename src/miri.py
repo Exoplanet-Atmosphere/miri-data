@@ -7,18 +7,16 @@ from astroquery.mast import Observations
 #Downloading _x1d.fits data: 
 #Target Exoplanets
 
+#contains one entry
 obs_table = Observations.query_criteria(
     instrument_name="MIRI/SLIT",
     target_name="GU-PSC-B",
-    #target_classification="planets"
 )
 
-#1 Entry
 product_list = Observations.get_product_list(obs_table)
-
-filtered_products = Observations.filter_products(product_list, productSubGroupDescription='x1d')
 
 manifest = Observations.download_products(product_list,
                                           extension="_x1d.fits",
                                           download_dir='./planetdata/GU-PSC-B'
                                           )
+
