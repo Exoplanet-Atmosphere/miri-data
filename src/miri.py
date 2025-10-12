@@ -13,6 +13,6 @@ obs_table = Observations.query_criteria(
 )
 
 #1 Entry
-product_list = Observations.get_product_list(filtered_obs)
+product_list = Observations.get_product_list(obs_table)
 
 manifest = Observations.download_products(product_list, download_dir='./planetdata/GU-PSC-B')

@@ -7,7 +7,6 @@ NIRISS
 
 NIRCam
 
-
 Access NASA instrument data through MAST
 python library for data access: astroquery
 
