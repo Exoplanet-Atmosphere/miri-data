@@ -17,3 +17,6 @@ update dependencies list "requirements.txt" in project root using:
 
 run a script using:
     python3 (python filename)
+
+deactivate venv:
+    deactivate
