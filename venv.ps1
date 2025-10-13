@@ -7,6 +7,7 @@ if (-not (Test-Path $VENV_PATH)) {
     Write-Host "Creating new virtual environment at $VENV_PATH"
     python -m venv $VENV_PATH
     Write-Host "Installing dependencies from requirements.txt..."
+    & (Join-Path $VENV_PATH "Scripts\python.exe") -m pip install --upgrade pip
     & (Join-Path $VENV_PATH "Scripts\python.exe") -m pip install -r (Join-Path $PROJECT_DIR "requirements.txt")
 }
 
