@@ -1,22 +1,20 @@
 #!/bin/bash
 
-PROJECT_DIR=$(realpath "${BASH_SOURCE[0]}"/..)
+# Resolve the project directory (parent of this script)
+PROJECT_DIR=$(realpath "$(dirname "${BASH_SOURCE[0]}")")
+VENV_PATH=$PROJECT_DIR"/venv"
 
-NEW_VENV=0 #false
-
-if [[ ! -d $PROJECT_DIR/venv ]]; then
-    echo $PROJECT_DIR/venv
-    python3 -m venv $PROJECT_DIR/venv
-    ((NEW_VENV=1))
+#Create venv if it doesn't exist, and install requirements
+if [[ ! -d $VENV_PATH ]]; then
+    echo "Creating new virtual environment at $VENV_PATH"
+    python3 -m venv $VENV_PATH
+    echo "Installing dependencies from requirements.txt..."
+    $VENV_PATH"/bin/python" -m pip install --upgrade pip
+    $VENV_PATH"/bin/python" -m pip install -r $PROJECT_DIR/"requirements.txt"
 fi
 
-if [[ $VIRTUAL_ENV != $PROJECT_DIR/venv ]]; then
-    source $PROJECT_DIR/venv/bin/activate
-fi
-
-PACKAGE_COUNT=$(pip list | wc -l)
-((PACKAGE_COUNT-=2))
-
-if [[ PACKAGE_COUNT -le 1 || NEW_VENV -eq 1 ]]; then
-    pip install -r requirements.txt
+#Activate the virtual environment if not already active
+if [[ $VIRTUAL_ENV != $VENV_PATH ]]; then
+    echo "Activating virtual environment..."
+    source $VENV_PATH/bin/activate
 fi
