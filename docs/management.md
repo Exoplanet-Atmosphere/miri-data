@@ -1,34 +1,28 @@
-Repo Hosted on Github
+## Git Commands
 
-BASIC GIT
+clone the project locally using: <br>
+```git clone https://github.com/Exoplanet-Atmosphere/miri-data```
 
-clone the project locally using:
-    git clone https://github.com/Exoplanet-Atmosphere/miri-data
+stage any changes to the project at project root using: <br>
+ ```git add (filename)```
 
-*note: the repo hosted on github is origin:
-    https://github.com/Exoplanet-Atmosphere/miri-data
+to stage all files modified: <br>
+```git add ./```
 
-stage any changes to the project at project root using:
-    git add (filename)
+commit any changes locally after staging using: <br>
+```git commit -m "(comment on changes)"```
 
-to stage all files modified:
-    git add ./
+push any commits to the github repo: <br>
+```git push -u origin (branch name)```
 
-commit any changes locally after staging using:
-    git commit -m "(comment on changes)"
+pull changes on origin to your local repo: <br>
+```git pull origin (branch you want to pull from)```
 
-push any commits to the cloud repo:
-    git push -u origin (branch name)
+switch the branch you're on locally: <br>
+```git switch (branch name)```
 
-pull changes on origin to your local repo:
-    git pull origin (branch you want to pull from)
+create a new branch: <br>
+```git checkout (new branch name)```
 
-switch the branch your on locally:
-    git switch (branch name)
-
-create a new branch:
-    git checkout (new branch name)
-
-merge changes from one branch into another branch
-    git merge (branch to merge) (branch being merged into)
-    
+merge changes from one branch into another branch: <br>
+```git merge (name of branch to merge) (name of branch being merged into)```
