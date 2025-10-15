@@ -87,10 +87,8 @@ def download_exoplanet_x1d(planetname):
 #execute if the script is called directly, but not if it is imported
 if __name__ == "__main__":
 
-    #if os.path.exists(planetfolder):
-    #    shutil.rmtree(planetfolder)
-
-    download_exoplanet_x1d("GU-PSC-B")
+    if not os.path.exists(planetfolder/"GU-PSC-B") :
+        download_exoplanet_x1d("GU-PSC-B")
 
     with fits.open(planetfolder+"/GU-PSC-B/MIRI/jw01188-o011_t003_miri_p750l_x1d.fits") as hdul:
         
@@ -106,37 +104,3 @@ if __name__ == "__main__":
         plt.ylabel("Flux erg/s/cm²/Å")
         plt.title("Normalized 1D Extracted Spectra Data")
         plt.show()
-        
-        '''
-        #normalize data with average of 0 and standard dev of 1
-        wavemean = np.mean(wavelength)
-        wavedev = np.std(wavelength)
-        for x in range(len(wavelength)):
-            wavelength[x] = (wavelength[x]-wavemean)/wavedev
-        
-        fluxmean = np.mean(flux)
-        fluxdev = np.std(flux)
-        for x in range(len(flux)):
-            flux[x] = (flux[x]-fluxmean)/fluxdev
-        '''
-
-        '''
-        #normalize data between 1 and 0
-        wavemin = min(wavelength)
-        waverange = max(wavelength)-wavemin
-        for x in range(len(wavelength)):
-            wavelength[x] = (wavelength[x]-wavemin)/waverange
-        
-        fluxmin = min(flux)
-        fluxrange = max(flux)-fluxmin
-        for x in range(len(flux)):
-            flux[x] = (flux[x]-fluxmin)/fluxrange
-        '''
-
-        '''
-        molecule = keras.Sequential([
-            tf.keras.layers.Flatten(input_shape=(28, 28)),
-            tf.keras.layers.Dense(128, activation='relu'),
-            tf.keras.layers.Dense(10)
-        ])
-        '''
