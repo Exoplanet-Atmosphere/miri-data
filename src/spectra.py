@@ -3,6 +3,8 @@ from astropy.io import fits
 import os
 import shutil
 from pathlib import Path
+import matplotlib.pyplot as plt
+import numpy as np
 
 #https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html
 #Go to MAST Observations by Advanced instrument: MIRI/SLIT target_classification: Exoplanets, select planet
@@ -65,6 +67,32 @@ def download_exoplanet_x1d(planetname):
     
     return True
 
+def visualize_spectrum(fits_file):
+        #open fits file
+    with fits.open(fits_file) as hdul:
+        hdul.info()
+        data = hdul[1].data
+
+        wavelength = data['Wavelength'][0]  # microns
+        flux = data['Flux'][0]  # Jy or similar units
+
+        # plotting
+        plt.figure(figsize=(10,5))
+        plt.plot(wavelength, flux, color='blue')
+        plt.title(f"Spectrum from {os.path.basename(fits_file)}")
+        plt.xlabel("Wavelength (microns)")
+        plt.ylabel("Flux")
+        plt.grid(True)
+        plt.show()
+
+        # Histogram of flux values
+        plt.figure(figsize=(6,4))
+        plt.hist(flux, bins=50, color='purple', alpha=0.7)
+        plt.title("Flux Distribution")
+        plt.xlabel("Flux")
+        plt.ylabel("Count")
+        plt.show()
+
 #MAIN
 
 if os.path.exists(planetfolder):
@@ -92,3 +120,10 @@ if os.path.exists(gupscb+"/jw01188-o011_t003_miri_p750l/jw01188-o011_t003_miri_p
         #print(hdul[1].data)
         #print(hdul[2].data)
 '''
+for path, subdirs, files in os.walk(planetfolder):
+    for name in files:
+        if name.endswith("_x1d.fits"):
+            fits_path = os.path.join(path, name)
+            print(f"Visualizing {fits_path}")
+            visualize_spectrum(fits_path)
+            break
