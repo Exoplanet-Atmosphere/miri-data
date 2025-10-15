@@ -87,7 +87,7 @@ def download_exoplanet_x1d(planetname):
 #execute if the script is called directly, but not if it is imported
 if __name__ == "__main__":
 
-    if not os.path.exists(planetfolder/"GU-PSC-B") :
+    if not os.path.exists(planetfolder+"/GU-PSC-B") :
         download_exoplanet_x1d("GU-PSC-B")
 
     with fits.open(planetfolder+"/GU-PSC-B/MIRI/jw01188-o011_t003_miri_p750l_x1d.fits") as hdul:
