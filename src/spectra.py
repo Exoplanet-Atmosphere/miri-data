@@ -84,23 +84,38 @@ def download_exoplanet_x1d(planetname):
     
     return True
 
+def visualize_spectrum(fits_file):
+        #open fits file
+    with fits.open(fits_file) as hdul:
+        hdul.info()
+        data = hdul[1].data
+
+        wavelength = data['WAVELENGTH'][1:len(data)-1]  # microns
+        flux = data['Flux'][1:len(data['FLUX'])-1]  # Jy or similar units
+
+        # plotting
+        plt.figure(figsize=(10,5))
+        plt.plot(wavelength, flux, color='blue')
+        plt.title(f"Spectrum from {os.path.basename(fits_file)}")
+        plt.xlabel("Wavelength (microns)")
+        plt.ylabel("Flux")
+        plt.grid(True)
+        plt.show()
+
+        # Histogram of flux values
+        plt.figure(figsize=(6,4))
+        plt.hist(flux, bins=50, color='purple', alpha=0.7)
+        plt.title("Flux Distribution")
+        plt.xlabel("Flux")
+        plt.ylabel("Count")
+        plt.show()
+
 #execute if the script is called directly, but not if it is imported
 if __name__ == "__main__":
 
     if not os.path.exists(planetfolder+"/GU-PSC-B") :
         download_exoplanet_x1d("GU-PSC-B")
 
-    with fits.open(planetfolder+"/GU-PSC-B/MIRI/jw01188-o011_t003_miri_p750l_x1d.fits") as hdul:
-        
-        data = hdul[1].data
+    test_file = planetfolder+"/GU-PSC-B/MIRI/jw01188-o011_t003_miri_p750l_x1d.fits"
 
-        #includes Nan at end and start, hence the slice
-        wavelength = data['WAVELENGTH'][1:387]
-        flux = data['FLUX'][1:387]
-
-        #quick plot of data
-        plt.plot(wavelength, flux)
-        plt.xlabel("Wavelength μm")
-        plt.ylabel("Flux erg/s/cm²/Å")
-        plt.title("Normalized 1D Extracted Spectra Data")
-        plt.show()
+    visualize_spectrum(test_file)
