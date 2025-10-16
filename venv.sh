@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Resolve the project directory (parent of this script)
+#Resolve the project directory (parent of this script)
 PROJECT_DIR=$(realpath "$(dirname "${BASH_SOURCE[0]}")")
 VENV_PATH=$PROJECT_DIR"/venv"
 
@@ -17,4 +17,13 @@ fi
 if [[ $VIRTUAL_ENV != $VENV_PATH ]]; then
     echo "Activating virtual environment..."
     source $VENV_PATH/bin/activate
+fi
+
+#Install missing dependencies if applicable
+MISSING_DEPS=$($VENV_PATH"/bin/python" -m pip install --dry-run -r requirements.txt | grep "Would install")
+
+if [[ $MISSING_DEPS != "" ]]; then
+  echo "Updating Dependencies..."
+  $VENV_PATH"/bin/python" -m pip install --upgrade pip
+  $VENV_PATH"/bin/python" -m pip install -r $PROJECT_DIR/"requirements.txt"
 fi
