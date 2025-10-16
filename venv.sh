@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Resolve the project directory (parent of this script)
+#Resolve the project directory (parent of this script)
 PROJECT_DIR=$(realpath "$(dirname "${BASH_SOURCE[0]}")")
 VENV_PATH=$PROJECT_DIR"/venv"
 
@@ -19,7 +19,7 @@ if [[ $VIRTUAL_ENV != $VENV_PATH ]]; then
     source $VENV_PATH/bin/activate
 fi
 
-#install missing depencies if applicable
+#Install missing dependencies if applicable
 MISSING_DEPS=$($VENV_PATH"/bin/python" -m pip install --dry-run -r requirements.txt | grep "Would install")
 
 if [[ $MISSING_DEPS != "" ]]; then
