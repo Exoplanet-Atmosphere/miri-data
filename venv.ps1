@@ -17,3 +17,12 @@ if (-not $env:VIRTUAL_ENV -or $env:VIRTUAL_ENV -ne $VENV_PATH) {
     Write-Host "Activating virtual environment..."
     . $activateScript  #dot source to persist in shell
 }
+
+#install missing depencies if applicable
+$MISSING_DEPS = & (Join-Path $VENV_PATH Scripts\python.exe) -m pip install --dry-run | Select-String -Pattern "Would install"
+
+if ($MISSING_DEPS) {
+    Write-Host "Updating Dependencies..."
+    & (Join-Path $VENV_PATH "Scripts\python.exe") -m pip install --upgrade pip
+    & (Join-Path $VENV_PATH "Scripts\python.exe") -m pip install -r (Join-Path $PROJECT_DIR "requirements.txt")
+}
